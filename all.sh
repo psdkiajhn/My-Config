@@ -26,3 +26,4 @@ cp neofetch-config.conf ~/.config/neofetch/config.conf
 cp 3.jpg ~/.config/neofetch/3.jpg
 unzip nvim.zip
 cp -r nvim ~/.config/
+sudo reboot
