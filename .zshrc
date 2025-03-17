@@ -10,6 +10,7 @@ source "${ZINIT_HOME}/zinit.zsh"
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 autoload -U compinit && compinit
 
@@ -24,18 +25,20 @@ setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
+setopt autocd
+setopt interactivecomments
+setopt no_beep
+setopt correct
+
+export YAZI_CWD_FILE="$HOME/.yazi-cwd"
+export EDITOR=nvim
 
 alias cd='z'
 alias ls='lsd'
 alias cat='bat'
 alias grep='grep --color=always'
-alias retor="sudo systemctl restart tor"
-alias rago='radiogogo'
+alias yazi='yazi --cwd-file="$YAZI_CWD_FILE"; if [ -f "$YAZI_CWD_FILE" ]; then cwd="$(cat "$YAZI_CWD_FILE")"; if [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then cd "$cwd" || echo "Failed to change directory to $cwd" >&2; fi; rm -f "$YAZI_CWD_FILE"; fi'
 
 eval "$(zoxide init zsh)"
 eval "$(oh-my-posh init zsh --config ~/.pt/base.toml)"
 eval $(thefuck --alias)
-
-export GTK_IM_MODULE=ibus
-export XMODIFIRES=@im=ibus
-export QT_IM_MODULE=ibus
